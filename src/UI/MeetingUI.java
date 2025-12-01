@@ -29,6 +29,8 @@ public class MeetingUI extends JFrame {
 
         // ✅ 회의록 작성 버튼 클릭 시 NoteUI 열기
         noteBtn.addActionListener(e -> new NoteUI());
+        //회의 추가 버튼 클릭 시 MeetingInsertUI 열기
+        insertBtn.addActionListener(e -> new MeetingInsertUI());
     }
 
 
