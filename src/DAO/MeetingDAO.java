@@ -1,6 +1,8 @@
 package DAO;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MeetingDAO {
     // insert meetings 회의 정보를 추가
@@ -84,6 +86,29 @@ public class MeetingDAO {
         }catch(SQLException e){
             System.out.println( meeting_id + " 회의 정보 조회 중 예외밝생: " +e.getMessage());
         }
+
+    }
+
+
+    public static List<String> getAllMeeting(Connection con)
+    {
+        String sql = "SELECT * FROM meetings";
+        List<String> result  = new ArrayList<>();
+        try{
+            PreparedStatement pst = con.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String date = rs.getString("date");
+                String location = rs.getString("location");
+                String row = id + " | " + title + " | " + date + " | " + location;
+                result.add(row);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
 
     }
 
